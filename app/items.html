@@ -1,0 +1,80 @@
+<section id="items">
+	<div class="edit_form">
+		<h2 class="">Сторінка товарів</h2>
+		<p><a href="#!/admin/category">Додати категорію</a></p>
+<p><a href="#!/admin/items">Додати товар</a></p>
+		<form  name="formItems">
+			<div class="">
+				<div><label for="category">Категорія:</label>
+				<select ng-options="category as category.name for category in item.categories" id="category"  ng-model="item.currentItem.category" required></select>
+				</div>
+				<div>
+				<label for="name">Назва:</label>
+				<input type="text" id="name" ng-model="item.currentItem.name" required>
+				</div>
+				<div>
+				<label for="price">Ціна:</label>
+				<input type="text" id="price" ng-model="item.currentItem.price" required> 
+				</div>
+				<div>
+				<label for="size">Розмір:</label>
+				<input type="text" id="size" ng-model="item.currentItem.size" required> 
+				</div>
+			</div>
+			<div class="">
+			<div>
+				<label for="image">URL зображення</label>
+				<input type="text" id="image" ng-model="item.currentItem.url">
+				</div>
+				<div>
+				<label for="description">Опис</label>
+				<textarea id="description" ng-model="item.currentItem.description"></textarea>
+				</div>
+			</div>
+				<button type="button" ng-class="formItems.$invalid == false ? 'btn btn_valid' : 'btn btn_invalid'" ng-click="item.save()" ng-disabled="formItems.$invalid">Зберегти</button>
+		
+		</form>
+	</div>
+	<div>
+	
+	  <p>Limit: <select class="" ng-model="item.limitValue" ng-options="item for item in item.limitRange"></select></p>
+        
+		<table>
+		<tr>
+		    <td><input type="text" placeholder="Знайти" ng-model="item.search"> </td>
+		    <td><input type="text" placeholder="Мінімальна ціна" ng-model="item.min"> </td>
+		    <td><input type="text" placeholder="Максимальна ціна" ng-model="item.max"> </td>
+		    	
+		    </tr>
+			<tr>
+				<th ng-click="item.orderedMe('category.name')">Категорія</th>
+				<th ng-click="item.orderedMe('name')">Назва</th>
+				<th ng-click="item.orderedMe('price')">Ціна</th>
+				<th ng-click="item.orderedMe('size')">Розмір</th>
+				<th>Опис</th>
+				<th>Зображення</th>
+				<th colspan="2">Опції</th>
+			</tr>
+
+<!--	<tr class="tr_hover" ng-repeat="itemElem in item.itemsLocal track by itemElem.id| limitTo : 3 ">-->
+			<tr class="tr_hover" ng-repeat="itemElem in item.itemsLocal| limitTo : item.limitValue|orderBy:item.orderedBy | filter: item.search|minMaxPrice:item.min:item.max track by itemElem.id">
+				<td>{{itemElem.category.name}}</td>
+				<td>{{itemElem.name}}</td>
+				<td>{{itemElem.price | currency:"₴"}}</td>
+				<td>{{itemElem.size}}</td>
+				<td>{{itemElem.description}}</td>
+				<td>
+				<img class="img_icon" src="{{itemElem.url}}">
+				</td>
+				<td>
+					<button type="button" class="btn btn_update" ng-click="item.update(itemElem)">Редагувати</button>
+				</td>
+				<td>
+					<button type="button" class="btn btn_delete" ng-click="item.delete(itemElem)">Видалити</button>
+				</td>
+			</tr>
+		</table>
+	</div>
+	
+	<lgs-pagination ng-model="item.page" size="item.size" total-pages="item.pageCount"></lgs-pagination>
+</section>

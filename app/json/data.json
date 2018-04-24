@@ -1,0 +1,5 @@
+admin = '[{"login" : "admin", "password" : "1234"}]'
+
+cat = '[{"name" : "Папір", "id" : "1"}, {"name" : "Зошити", "id" : "2"},  {"name" : "Пакувальні матеріали", "id" : "3"}, {"name" : "Ручки", "id" : "4"}, {"name" : "Олівці", "id" : "5"},{"name" : "Фарби", "id" : "6"}]'
+
+it = '[{"name" : "Папір1", "id" : "1", "category":{"name":"Папір","id" : "1"}, "price": "12", "description":"Олівці", "size":"1"}, {"name" : "Зошити1", "id" : "1", "category":{"name":"Зошити","id" : "2"}, "price": "12", "description":"Зошити", "size":"1"}]'

@@ -1,0 +1,41 @@
+<section id="category">
+<p><a href="#!/admin/category">Додати категорію</a></p>
+<p><a href="#!/admin/items">Додати товар</a></p>
+	<h2>Категорії</h2>
+	<div class="edit_form">
+		<form action="" name="formCategory">
+				<label for="name">Назва категорії:</label>
+				<input type="text" id="name" ng-model="category.currentCategory.name" required> 
+		
+				<button type="submit" ng-class="formCategory.$invalid == false ? 'btn btn_valid' : 'btn btn_invalid'" ng-click="category.save()" ng-disabled="formCategory.$invalid">Зберегти</button>
+		</form>
+	</div>
+	
+
+	
+	<div>
+	 <p>Limit: <select class="" ng-model="category.limitValue" ng-options="item for item in category.limitRange"></select></p>
+		<table class="table">
+		    <tr>
+		    <td><input type="text" placeholder="Знайти" ng-model="category.search"></td>
+		    	
+		    </tr>
+			<tr>
+				<th ng-click="category.orderedMe('name')">Назва категорії</th>
+				<th colspan="2">Опції</th>
+			</tr>
+			
+		
+			<tr class="tr_hover" ng-repeat="categoryElem in category.categoriesLocal| limitTo : category.limitValue | orderBy:category.orderedBy| filter: category.search track by categoryElem.id">
+				<td>{{categoryElem.name}}</td>
+				<td>
+					<button type="button" class="btn btn_update" ng-click="category.update(categoryElem, categoryElem.id)">Змінити</button>
+		     </td>
+			     <td>
+					<button type="button" class="btn btn_delete" ng-click="category.delete(categoryElem)">Видалити</button>
+				</td>
+			</tr>
+		</table>
+	</div>
+</section>
+

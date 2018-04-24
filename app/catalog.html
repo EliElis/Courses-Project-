@@ -1,0 +1,57 @@
+<section id="catalog">
+	<div class="catalog-bar">
+    <div class="catalog-bar_inp">
+		<input type="text" placeholder="Мінімальна ціна" ng-model="catalog.min">
+		<input type="text" placeholder="Максимальна ціна" ng-model="catalog.max"> 
+		</div>
+			<p class="catalog-bar_select">Tоварів на сторінці:
+			<select ng-model="catalog.limitValue" ng-options="item for item in catalog.limitRange"></select>
+			</p>
+		
+		</div>
+		
+		
+		<div class="catalog-content">
+	<div class="catalog_card" ng-repeat="itemElem in catalog.itemsLocal| limitTo : catalog.limitValue|
+		minMaxPrice:catalog.min:catalog.max | filter: catalog.selectCategories |filter:catalog.search track by itemElem.id">
+			<div class="img_card"><img ng-src="{{itemElem.url}}"></div>
+			 <div class="card-content">
+			<div class="card-txt">
+			<p>{{itemElem.name}}</p> 
+			<p>{{itemElem.price | currency:"₴"}}</p>
+			</div>
+			<button type="button" ng-click="catalog.show(itemElem)" class="plus-ico"></button>
+			</div>
+			<div class="card-btns">
+
+			<button type="button" ng-class="catalog.inCart(itemElem)? 'btn btn_valid 
+btn_active':'btn btn_valid'" ng-click="catalog.inCart(itemElem)?catalog.cartReplace():catalog.add(itemElem)" ng-bind="catalog.inCart(itemElem)?catalog.cartBtnTxt2:catalog.cartBtnTxt"></button>
+        
+			<button type="button" ng-class="catalog.inWish(itemElem)? 'btn heart_ico_active':'btn heart_ico'" ng-click="catalog.wish_it(itemElem)"></button>
+			
+		</div>
+	</div>
+	</div>
+	
+	<div ng-show="catalog.showVar" class="showCat">
+		<div class="showCard">
+			<button type="button" class="cross_ico" ng-click="catalog.hide()"></button>
+			<div class="show-img"><img ng-src="{{catalog.shownElem.url}}"></div>
+			<div class="show-content">
+			<h4>Детальна інформація</h4>
+			<div class="show-text">
+			<p><span>Назва:</span> {{catalog.shownElem.name}}</p>
+			<p><span>Категорія:</span> {{catalog.shownElem.category.name}}</p>
+			</div>
+			<div class="show-text">
+			<p><span>Ціна:</span> {{catalog.shownElem.price}}</p>
+			<p><span>Кількість в упаковці:</span> {{catalog.shownElem.size}}</p>
+			</div>
+			<p><span>Опис:</span> {{catalog.shownElem.description}}</p>
+			</div>
+			
+			
+			</div>
+	</div>
+			
+</section>

@@ -1,0 +1,11 @@
+<ul class="pagination">
+    <li class="pag" ng-click="changePage(page - 1, $event)">
+        <a class="" href="#">Previous</a>
+    </li>
+    <li ng-class="page == p ? 'pag pag-active' : 'pag'" ng-repeat="p in pages" ng-click="changePage(p, $event)">
+        <a class="" href="#">{{p}}</a>
+    </li>
+    <li class="pag" ng-click="changePage(page + 1, $event)">
+        <a class="" href="#">Next</a>
+    </li>
+</ul>

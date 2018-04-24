@@ -1,0 +1,27 @@
+<section id="cart">
+	
+	<div ng-class="cart.bgCart()?'cart-empty':'cart-full'">
+
+	<table ng-class="cart.bgCart()?'no-table':'table'">
+	<caption>Товари у кошику</caption>
+		<tr>
+		<th ng-click="item.orderedMe('category.name')">Категорія</th>
+				<th ng-click="item.orderedMe('name')">Назва</th>
+				<th ng-click="item.orderedMe('price')">Ціна</th>
+				<th></th>
+				<th></th>
+		</tr>
+		<tr class="tr-centred" ng-repeat="itemElem in cart.cartLocal track by $index">
+			<td>{{itemElem.category.name}}</td>
+			<td>{{itemElem.name}}</td>
+			<td>{{itemElem.price | currency:"₴"}}</td>
+				<td>
+				<img class="img_icon" src="{{itemElem.url}}">
+				</td>
+			<td>
+			<button type="button" class="cross_ico" ng-click="cart.delete(itemElem)"></button>
+			</td>
+		</tr>
+</table>
+</div>
+</section>

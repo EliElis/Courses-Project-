@@ -1,0 +1,14 @@
+<section id="adminLog">
+	<h2>Вхід в адмін-панель</h2>
+	<form>
+		<p><input type="text" placeholder="Логін" ng-model="admin.currentAdm.login" required></p>
+		<p><input type="password" placeholder="Пароль" ng-model="admin.currentAdm.password" required></p>
+		<button type="submit" class=" btn btn_valid"ng-click="admin.login()">Увійти</button>
+	</form>
+</section>
+
+
+
+
+<p><a href="#!/admin/category">Додати категорію</a></p>
+<p><a href="#!/admin/items">Додати товар</a></p>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="uk" ng-app="shopApp">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Color it</title>
+	<link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+	<link rel="stylesheet" href="css/style.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular-route.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.10/ngStorage.min.js"></script>
+	<!--	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-resource/1.6.9/angular-resource.min.js"></script>-->
+</head>
+
+<body ng-controller="indexCtrl as index" scroll ng-class="{scroll:boolChangeClass}">
+	<header id="header">
+	<nav class="topnav" id="Topnav">
+		<div ng-click="index.topnavDisplay()" class="topnav_icon"><div class="menu_ico"></div></div> 
+		<ul class="menu topnav_ul">
+			<li class="topnav_item" ng-class="{active : index.activeTopnav === 'Home'}">
+			<a href="#!/" ng-click="index.activeTopnav = 'Home'">Головна</a></li>
+			<li class="topnav_item"  ng-class="{active : index.activeTopnav === 'About'}">
+			<a href="#!/about" ng-click="index.activeTopnav = 'About'">Про нас</a></li>
+			<li class="topnav_item"  ng-class="{active : index.activeTopnav === 'Items'}" ng-click="index.select_catalog()">
+			<a href="#!/catalog" ng-click="index.activeTopnav = 'Items'">Товари</a></li>
+			<li class="topnav_item" ng-class="{active : index.activeTopnav === 'Contact'}"> 
+			<a href="#!/contacts" ng-click="index.activeTopnav = 'Contact'">Контакти</a></li>
+			<li class="topnav_item" ng-click="index.show()" ng-class="{active : index.activeTopnav === 'Cabinet'}">
+			<a ng-click="index.activeTopnav = 'Cabinet'">Особистий кабінет</a></li>
+		</ul>
+		<span><a href="#!/wish"><div class="heart_ico"></div></a></span>
+
+	</nav>
+			
+			<div class="header-content">
+			<div class="header_contacts">
+				<div class="contacts_text"><div class="phone_ico"></div><span>(032)000-00-00</span></div>
+		</div>
+		<div class="logo_holder">
+			<a href="#">
+				<div class="logo_img"><img src="/images/logo.png"></div>
+			</a>
+			<p>Товари для творчості,<br> навчання та офісу</p>
+		</div>
+		<div class="header_icons">
+				<div> <a href="#!/cart"><div class="cart_ico"></div></a>
+			</div>
+		</div>
+		</div>
+
+	</header>
+	<nav class="menu_category">
+		<div class="dropdown">
+		<span ng-click="index.select_catalog()"><a href="#!/catalog">Товари</a></span>
+		<ul class="menu_category_ul">
+	
+			<li ng-repeat="categoryElem in index.categoriesLocal track by categoryElem.id" ng-click="index.index_select(categoryElem.name)"> <a href="#!/catalog"> {{categoryElem.name}}</a></li>
+		</ul>
+		</div>
+			<form class="search">
+				<input type="search" placeholder="Пошук" ng-model="index.search">
+				<button type="submit" ng-click="index.search_click(index.search)">
+					<a href="#!/catalog"><div class="search_ico"></div></a>
+				</button>
+			</form>
+	</nav>
+	<div ng-show="index.showVar" class="show">
+		<form id="loginForm" class="showForm">
+		<div class="form-control">
+		
+			<p ng-class="formSwitch!=='log'? 'form-switch form-switch_active':'form-switch form-switch_usual'" ng-click="formSwitch='reg'">Вхід</p>
+			<p ng-class="formSwitch=='log'? 'form-switch form-switch_active':'form-switch form-switch_usual'" ng-click="formSwitch='log'">Регестрація</p> 
+				<button type="button" class="cross_ico" ng-click="index.hide()"></button>
+			</div>
+			<div ng-switch="formSwitch" class="form-content">
+			<div ng-switch-default>
+			<div>
+				<input class="form-inp" id="log-inp" type="text" placeholder="Логін" required> </div>
+			<div>
+				<input class="form-inp" id="pass-inp" type="password" placeholder="Пароль" required> </div>
+			<button type="submit" class=" btn btn_valid" id="btn-log">Увійти</button>
+			</div>
+			
+			<div ng-switch-when="log">
+			<div>
+				<input class="form-inp" id="log-inp" type="text" placeholder="Логін" required> </div>
+					<div>
+				<input class="form-inp" id="mail-inp"  type="email" placeholder="E-mail" required> </div>
+			<div>
+				<input class="form-inp" id="pass-inp"  type="password" placeholder="Пароль" required> </div>
+			<button type="submit" class="btn btn_valid" id="btn-reg">Зареєструватись</button>
+			</div>
+			</div>
+		</form>
+
+	</div>
+	<div id="view">
+		<ng-view></ng-view>
+	</div>
+	<footer id="footer"> 
+	<img src="/images/logo-footer.png" height="50">
+	<p>Інтернет-магазин канцтоварів</p>	
+		
+		<div class="admin" data-title="Admin panel">
+			<a href="#!/admin/login"><div class="lock_ico"></div></a>
+		</div></footer>
+	<script src="js/main.js"></script>
+	<script src="js/service.js"></script>
+	<script src="js/category.js"></script>
+	<script src="js/items.js"></script>
+	<script src="js/catalog.js"></script>
+	<script src="js/cart.js"></script>
+	<script src="js/filters.js"></script>
+	<script src="js/wish.js"></script>
+	<script src="js/home.js"></script>
+	<script src="js/slider.js"></script>
+	<script src="js/admin.js"></script>
+	<script src="json/data.json"></script>
+	<script src="js/directives.js"></script>
+	<script src="js/contacts.js"></script>
+</body>
+
+</html>
