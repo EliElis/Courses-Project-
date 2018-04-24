@@ -2,8 +2,8 @@
 It was my final project from Logos IT Academy courses.<br><br>
 There is an ability to add, upgrade and remove categories and products. <br>Data is saved in local storage.<br>
 Products can be filtered by categories, added to the shopping cart or favorite.<br> 
-No backend, without usage of db. 
-
+No backend, without usage of db. <br>
+In the demo goods and categories are read from JSON file.
 <a href="http://color-it.alisa-umnova.pp.ua">See demo</a>
 
 
